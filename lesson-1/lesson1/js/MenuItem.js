@@ -5,7 +5,7 @@ function MenuItem(href, title, haveSub) {
 }
 
 MenuItem.prototype.render = function () {
-    console.log(this.haveSub);
+    // console.log(this.haveSub);
     if (!this.haveSub) {
         return '<li><a href="' + this.href + '">' + this.title + '</a></li>';
     } else if (this.haveSub) {
