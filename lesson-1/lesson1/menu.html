@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <script src="js/Container.js"></script>
+    <script src="js/Menu.js"></script>
+    <script src="js/Submenu.js"></script>
+    <script src="js/MenuItem.js"></script>
+    <script>
+        window.onload = function () {
+            var menu1 = new Menu('my', 'my', [
+                new MenuItem('/', 'Главная страница'),
+                new MenuItem('/about', 'О нас'),
+                new MenuItem('/service', 'Услуги'),
+                new MenuItem('/contacts', 'Контакты'),
+                new MenuItem('/blog', 'Блог'),
+                new MenuItem('/catalogue', 'Каталог', true),
+                new Submenu('my', 'cat-style', [
+                    new MenuItem('/catalogue/shoes', 'Тапки'),
+                    new MenuItem('/catalogue/hats', 'Шапки'),
+                    new MenuItem('/catalogue/inventory', 'Тяпки'),
+                ])
+            ]);
+
+            var menuApp = document.getElementById('menu1');
+            menuApp.innerHTML = menu1.render();
+        };
+
+        function menuRemover() {
+            return (typeof menu1 != 'undefined') ? menu1.remove() : false;
+        }
+    </script>
+</head>
+<body>
+<div id="menu1"></div>
+<button onclick="menuRemover()">Удалить меню</button>
+</body>
+</html>
