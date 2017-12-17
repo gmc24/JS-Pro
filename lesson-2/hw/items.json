@@ -1,5 +1,10 @@
 [
   {"href": "/", "title": "Домашняя страница - AJAX"},
   {"href": "/about/", "title": "О нас"},
-  {"href": "/contacts/", "title": "Контакты"}
+  {"href": "/contacts/", "title": "Контакты"},
+  {"href": "/catalogue/", "title": "Каталог", "haveSub":[
+    {"href": "/", "title": "Домашняя страница - AJAX"},
+    {"href": "/about/", "title": "О нас"},
+    {"href": "/contacts/", "title": "Контакты"}
+  ]}
 ]
