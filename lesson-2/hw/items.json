@@ -1,10 +1,14 @@
 [
-  {"href": "/", "title": "Домашняя страница - AJAX"},
-  {"href": "/about/", "title": "О нас"},
-  {"href": "/contacts/", "title": "Контакты"},
-  {"href": "/catalogue/", "title": "Каталог", "haveSub":[
-    {"href": "/", "title": "Домашняя страница - AJAX"},
-    {"href": "/about/", "title": "О нас"},
-    {"href": "/contacts/", "title": "Контакты"}
-  ]}
+  {"href": "/", "title": "Home"},
+  {"href": "/man/", "title": "Man", "haveSub":[
+    {"href": "/clothing", "title": "Clothing"},
+    {"href": "/shoes/", "title": "Shoes"},
+    {"href": "/watches/", "title": "Watches"},
+    {"href": "/hats/", "title": "Hats"}
+  ]},
+  {"href": "/woman/", "title": "Women"},
+  {"href": "/kids/", "title": "Kids"},
+  {"href": "/accessories/", "title": "Accessories"},
+  {"href": "/features/", "title": "Features"},
+  {"href": "/hotdeals/", "title": "Hot Deals"}
 ]
