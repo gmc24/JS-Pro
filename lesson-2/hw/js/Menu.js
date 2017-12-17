@@ -15,13 +15,13 @@ Menu.prototype.render = function () {
         {
             //Посмотреть, а Submenu ли это
             if(this.items[i] instanceof Submenu){
-                console.log('Экземпляр Submenu');
+                // console.log('Экземпляр Submenu');
                 //Что-то сделать
                 result += this.items[i].render();
                 result += '</li>';
             }
             if(this.items[i] instanceof MenuItem){
-                console.log('Экземпляр MenuItem');
+                // console.log('Экземпляр MenuItem');
                 result += this.items[i].render(); //render принадлежит пункту меню
             }
         }

@@ -9,7 +9,7 @@ MenuItem.prototype.render = function () {
     if (this.haveSub.length == 0) {
         return '<li><a href="' + this.href + '">' + this.title + '</a></li>';
     } else {
-        return '<li>' + this.title;
+        return '<li class="has-submenu"><a href="#">' + this.title + '</a>';
     }
 
 };
