@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <script src="js/Container.js"></script>
+    <script src="js/Menu.js"></script>
+    <script src="js/Submenu.js"></script>
+    <script src="js/MenuItem.js"></script>
+    <script>
+        window.onload = function () {
+
+            document.getElementById('btn1').addEventListener('click', function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', './items.json', true); //Асинхронный запрос
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    //console.log(xhr.readyState);
+                    if (xhr.readyState !== 4) {
+                        return;
+                    }
+
+                    if(xhr.status === 200){
+                        showMenu(JSON.parse(xhr.responseText));
+                    } else {
+                        console.log('Error', xhr.status, xhr.statusText);
+                    }
+                }
+            });
+
+            function showMenu(items) {
+                //console.log(items);
+
+                var itemsMenuItem = [];
+                for (var i = 0; i < items.length; i++)
+                {
+                    itemsMenuItem.push(new MenuItem(items[i].href, items[i].title, items[i].haveSub));
+                    if (items[i].haveSub.length) {
+                        var submenuItems = [];
+                        for (var j = 0; j < items[i].haveSub.length; j++) {
+                            submenuItems.push(new MenuItem(items[i].haveSub[j].href, items[i].haveSub[j].title, items[i].haveSub));
+                        }
+                        itemsMenuItem.push(new Submenu('my','my_sub', submenuItems);
+                    }
+                }
+
+                var menu1 = new Menu('my', 'my', itemsMenuItem);
+
+                var menuApp = document.getElementById('menu1');
+                menuApp.innerHTML = menu1.render();
+            }
+
+           /* var menu1 = new Menu('my', 'my', [
+                new MenuItem('/', 'Главная страница'),
+                new MenuItem('/about', 'О нас'),
+                new MenuItem('/service', 'Услуги'),
+                new MenuItem('/contacts', 'Контакты'),
+                new MenuItem('/blog', 'Блог'),
+                new MenuItem('/catalogue', 'Каталог', true),
+                new Submenu('my', 'cat-style', [
+                    new MenuItem('/catalogue/shoes', 'Тапки'),
+                    new MenuItem('/catalogue/hats', 'Шапки'),
+                    new MenuItem('/catalogue/inventory', 'Тяпки'),
+                ])
+            ]);*/
+        };
+
+        function menuRemover() {
+            return (typeof menu1 != 'undefined') ? menu1.remove() : false;
+        }
+    </script>
+</head>
+<body>
+<div id="menu1"></div>
+<button id="btn1">Получить пункты и отрисовать меню</button>
+<br>
+<br>
+<button onclick="menuRemover()">Удалить меню</button>
+</body>
+</html>
