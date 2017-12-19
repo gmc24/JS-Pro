@@ -27,9 +27,7 @@
         //2
         var str = "Lorem ipsu'm dolor sit amet, 'consectetur' adipisicing 'elit'.";
 
-        var div = document.createElement('div');
-        div.innerText = str.replace( /(?:^'(.+)')/gm, "\"$1\"" );
-document.body.appendChild(div);
+        console.log( str.replace( /(?:^'(.+)')/gm, "\"$1\"" ) );
 
     </script>
 </head>
