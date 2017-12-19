@@ -25,7 +25,7 @@
         console.log( str.replace( /'/g, '"' ) );
 
         //2
-        var str = "Lorem ipsu'm dolor sit amet, 'consectetur' adipisicing 'elit'.";
+        var str = "'Lorem ipsu'm dolor sit amet, 'consectetur' adipisicing 'elit'.'";
 
         console.log( str.replace( /(?:^'(.+)')/gm, "\"$1\"" ) );
 
