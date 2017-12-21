@@ -293,8 +293,8 @@
             tabs.removeClass('active');
             panels.removeClass('active');
             $(this).addClass('active');
-//            panels.index(this).addClass('active');
-            console.log(index(this));
+            panels.eq($(this).index()).addClass('active');
+//            console.log($(this).index());
         });
     });
 </script>
