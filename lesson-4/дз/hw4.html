@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery + AJAX</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Tahoma, sans-serif;
+        }
+        .submit-form {
+            width: 390px;
+            margin: 20px auto;
+        }
+        h3 {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        h3+p {
+            font-size: 0.9em;
+            color:  grey;
+        }
+        button {
+            display: inline-block;
+            width: 180px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid #eaeaea;
+            color: #4a4a4a;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            line-height: 50px;
+            text-align: center;
+            margin: 22px 0 0;
+        }
+        button:hover {
+            background-color: #e2e2e2;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column-reverse;
+            margin-top: 28px;
+        }
+        .input-group > label, .cb-input-group > input {
+            display: block;
+        }
+        .input-group > input:focus {
+            /*outline: 2px solid grey;*/
+        }
+        .input-group > input:focus:not(:placeholder-shown):valid {
+            box-shadow: inset 0 0 10px lightgreen;
+            outline: 1px solid lightgreen;
+        }
+        .input-group > input:focus:not(:placeholder-shown):invalid {
+            box-shadow: inset 0 0 10px lightcoral;
+            outline: 1px solid lightcoral;
+        }
+        .input-group > input {
+            width: 390px;
+            height: 45px;
+            background-color: white;
+            border: 1px solid #eaeaea;
+            color: #898989;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 45px;
+            padding: 0 20px;
+            margin-bottom: 23px;
+        }
+        .input-group > label {
+            color: #222;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+        .input-group input[required] + label::after {
+            content: '*';
+            font-size:17px;
+            color: #ff0d0d;
+            margin-left: 4px;
+        }
+        .input-group p.req-tip {
+            color: #ff0d0d;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            margin-bottom: 20px;
+        }
+
+        [class*='error_'] {
+            font-size: 0.9em;
+            color: darkred;
+            background-color: lightcoral;
+            border: 1px solid red;
+            padding: 8px 20px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        input.good {
+            background-color: lightgreen;
+        }
+
+        input.bad {
+            background-color: lightcoral;
+        }
+
+
+    </style>
+    <script src="../../../bower_components/jquery/dist/jquery.slim.js"></script>
+    <script>
+
+        /*
+        1) У вас есть большой текст, в котором для обозначения диалогов используются одинарные кавычки.
+        Придумать шаблон, который меняет одинарные кавычки на двойные.
+2) Улучшить шаблон таким образом, чтобы конструкции типа aren’t не меняли одинарную кавычку на двойную.
+3) Создать форму обратной связи с полями: Имя, Телефон, e-mail, текст, кнопка «Отправить».
+
+- При нажатии на кнопку «Отправить» произвести валидацию полей следующим образом:
+- Имя содержит только буквы;
+- Телефон подчиняется шаблону +7(000)000-0000;
+- E-mail выглядит как mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru
+- Текст произвольный;
+- В случае не прохождения валидации одним из полей необходимо выделять это поле красной рамкой и сообщать пользователю об ошибке.
+        */
+
+        //1
+        var str = "Lorem ipsum dolor sit amet, 'consectetur' adipisicing 'elit'.";
+
+        console.log( str.replace( /'/g, '"' ) );
+
+        //2
+        var str = "'Lorem ipsu'm dolor sit amet, 'consectetur' adipisicing 'elit'.'";
+
+        console.log( str.replace( /(?:^'(.+)')/gm, '"$1"' ) );
+
+        //3
+        function check_input(value, pattern) {
+            var pattern = new RegExp(pattern, 'gi');
+            if (pattern.test(value)) {return true} else {return false};
+        }
+        function errorMsg(el) {
+            var wrap = document.getElementById('errors');
+            wrap.innerHTML = '';
+            for (i=0; i<el.length; i++) {
+                var el_name = document.querySelector('#' + el[i].id + ' + label').textContent;
+                var msg = document.createElement('div');
+                msg.classList.add('error_' + el[i].id);
+                msg.innerHTML = 'Некорректно заполнено поле ' + el_name;
+                wrap.appendChild(msg);
+            }
+        }
+
+        window.onload = function () {
+            var req_inputs = document.querySelectorAll('input[required]');
+            var btn = document.querySelector('#message button');
+            btn.addEventListener('click', function () {
+//                var result = 0;
+                for (var i=0; i<req_inputs.length; i++) {
+                    if (check_input(req_inputs[i].value, req_inputs[i].pattern)) {
+                        req_inputs[i].classList.add('good');
+                        req_inputs[i].classList.remove('bad');
+                    } else {
+                        req_inputs[i].classList.add('bad');
+                        req_inputs[i].classList.remove('good');
+                    }
+                }
+                var bad_inputs = document.querySelectorAll('input.bad');
+                if (bad_inputs.length == 0) {
+                    alert ('Сообщение отправлено!');
+                } else {
+                    errorMsg(bad_inputs);
+                }
+//                return false;
+            })
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div class="submit-form">
+    <form id="message" action="#">
+        <h3>Напишите нам</h3>
+        <p>Мы будем очень рады и быстро ответим</p>
+        <div id="errors"></div>
+        <div class="input-group">
+            <textarea name="cb-text" id="cb-text" cols="30" rows="10" placeholder="Your message"  tabindex="4"></textarea>
+            <p class="req-tip">* Required Fields</p>
+            <input type="email" id="cb-email" required placeholder=" " pattern="^.+(?:.|\.)@.+\.(?:.+){2,}$" tabindex="3">
+            <label for="cb-email">Email address</label>
+            <input type="phone" id="cb-phone" required placeholder=" " pattern="^\+7[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$" tabindex="2">
+            <label for="cb-phone">Phone</label>
+            <input type="text" id="cb-name" required placeholder=" " pattern="^(?:[а-яА-ЯёЁ\w]+.*){6,}$" tabindex="1">
+            <label for="cb-name">Name</label>
+
+        </div>
+        <button tabindex="5">Отправить</button>
+    </form>
+</div>
+<style>
+    .tab_wrap {
+        width: 800px;
+        height: 600px;
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab_container {
+        margin-top: 30px;
+        width: 100%;
+    }
+    .tabs {
+        display: flex;
+        align-content: flex-start;
+    }
+    .tab {
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 10px 20px;
+        line-height: 1em;
+        background-color: #DDDDDD;
+        border: 2px solid transparent;
+        border-bottom: 2px solid #000;
+        cursor: pointer;
+    }
+    .tabs > .active {
+        border: 2px solid #000;
+        border-bottom: 2px solid transparent;
+        background-color: #bbbbbb;
+    }
+    .content {
+        border: 2px solid #000;
+        margin-top: -2px;
+    }
+    
+    .panel {
+        padding: 20px;
+        display: none;
+    }
+    .content > .active {
+        display: block;
+    }
+    .panel > p {
+        text-indent: 2em;
+        text-align: justify;
+        line-height: 1.4em;
+    }
+</style>
+<div class="tab_wrap">
+    <button id="btn_hor">Горизонтальные</button>
+    <button id="btn_vert">Вертикальные</button>
+    <div class="tab_container">
+        <div class="tabs">
+            <div class="tab">Вкладка 1</div>
+            <div class="tab active">Вкладка 2</div>
+            <div class="tab">Вкладка 3</div>
+            <div class="tab">Вкладка 4</div>
+        </div>
+        <div class="content">
+            <div class="panel"><p>1/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam animi
+                consequuntur corporis debitis doloremque ducimus fugit harum, id iusto laudantium natus nulla
+                praesentium quis voluptatibus? Architecto corporis cum inventore, nisi porro quos! Eaque illo molestiae
+                odit placeat quisquam repellendus reprehenderit suscipit! Consequuntur corporis cum excepturi fugit
+                optio quae rem?</p></div>
+            <div class="panel active"><p>2/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores doloremque
+                ea ex magnam quasi reprehenderit saepe totam veniam. Accusantium est facere libero nobis perspiciatis! A
+                debitis dignissimos dolores dolorum eos, error ex explicabo iure maxime minima molestiae odit pariatur
+                quas quisquam ullam? At deserunt illum ipsa iusto, similique totam?</p></div>
+            <div class="panel"><p>3/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto commodi
+                fugiat harum laborum minima, nulla qui sed sequi voluptatem? Culpa iste maiores necessitatibus rem? Amet
+                deserunt fuga incidunt laudantium necessitatibus nulla officiis omnis pariatur, qui, quisquam rem
+                reprehenderit totam vero? Accusamus accusantium at distinctio doloribus id incidunt reiciendis,
+                voluptas.</p></div>
+            <div class="panel"><p>4/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur
+                corporis error excepturi ipsa minima modi possimus sunt tempora vero! Animi aperiam at autem
+                consequuntur cumque dicta dolore dolores dolorum earum exercitationem harum ipsum magni maiores,
+                mollitia optio placeat praesentium quas recusandae, reiciendis rerum saepe sequi similique suscipit,
+                tempore tenetur.</p></div>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function () {
+        var panels = $('.content > .panel');
+        var tabs = $('.tabs>.tab');
+        $('.tab').on('click', function () {
+            tabs.removeClass('active');
+            panels.removeClass('active');
+            $(this).addClass('active');
+//            panels.index(this).addClass('active');
+            console.log(index(this));
+        });
+    });
+</script>
+</body>
+</html>
