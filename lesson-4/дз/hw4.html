@@ -204,16 +204,16 @@
     </form>
 </div>
 <style>
-    .tab_wrap {
+    .tabs_wrap {
         width: 800px;
         height: 600px;
         margin: 30px auto;
-        display: flex;
-        flex-direction: column;
     }
     .tab_container {
         margin-top: 30px;
         width: 100%;
+        display: flex;
+        flex-direction: column;
     }
     .tabs {
         display: flex;
@@ -252,7 +252,7 @@
         line-height: 1.4em;
     }
 </style>
-<div class="tab_wrap">
+<div class="tabs_wrap">
     <button id="btn_hor">Горизонтальные</button>
     <button id="btn_vert">Вертикальные</button>
     <div class="tab_container">
@@ -289,12 +289,18 @@
     jQuery(document).ready(function () {
         var panels = $('.content > .panel');
         var tabs = $('.tabs>.tab');
+
         $('.tab').on('click', function () {
             tabs.removeClass('active');
             panels.removeClass('active');
             $(this).addClass('active');
             panels.eq($(this).index()).addClass('active');
-//            console.log($(this).index());
+        });
+
+        $('#btn_vert').on('click', function () {
+            $('.tab_container').css({'flexDirection':'row'});
+            $('.tabs').css({'minWidth':'180px','display':'flex','flexDirection':'column'});
+
         });
     });
 </script>
