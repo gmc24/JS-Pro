@@ -71,6 +71,18 @@ Basket.prototype.add = function (idProduct, price) {
     this.refresh(); //Перерисовываем корзину
 };
 
+Basket.prototype.delete = function (idProduct, price) {
+    var basketItem = {
+        "id_product": idProduct,
+        "price": price
+    };
+
+    this.countGoods--;
+    this.amount -= price;
+    this.basketItems.splice(basketItem);
+    this.refresh(); //Перерисовываем корзину
+};
+
 Basket.prototype.refresh = function () {
     var $basketData = $('#basket_data');
     $basketData.empty(); //Очищаем содержимое контейнера
