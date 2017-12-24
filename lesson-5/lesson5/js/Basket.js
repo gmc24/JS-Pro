@@ -79,7 +79,9 @@ Basket.prototype.delete = function (idProduct, price) {
 
     this.countGoods--;
     this.amount -= price;
-    this.basketItems.splice(basketItem);
+    for (var i=0; i<this.basketItems.length; i++) {
+        if (this.basketItems[i].id_product == basketItem.id_product) {this.basketItems.splice(i,1);}
+    }
     this.refresh(); //Перерисовываем корзину
 };
 
