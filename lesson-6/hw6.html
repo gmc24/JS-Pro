@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery + AJAX</title>
+    <link rel="stylesheet" href="../../bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css">
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+
+
+</head>
+<body>
+
+<div class="submit-form">
+    <form id="message" action="#">
+        <h3>Напишите нам</h3>
+        <p>Мы будем очень рады и быстро ответим</p>
+        <div id="errors"></div>
+        <div class="input-group">
+            <textarea name="cb-text" id="cb-text" cols="30" rows="10" placeholder="Your message"  tabindex="5"></textarea>
+            <p class="req-tip">* Required Fields</p>
+            <input type="email" id="cb-email" required placeholder="mymail@site.ru" pattern="^.+(?:.|\.)@.+\.(?:.+){2,}$" tabindex="4">
+            <label for="cb-email">Email address</label>
+            <input type="phone" id="cb-phone" required placeholder="+7 999 999-99-99" pattern="^\+7[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$" tabindex="3">
+            <label for="cb-phone">Phone</label>
+            <input type="text" id="cb-bd" required value="01.01.1990" pattern="^\d\d\.\d\d\.\d\d\d\d$" tabindex="2">
+            <label for="cb-bd">Birthday</label>
+            <input type="text" id="cb-name" required placeholder="Your Name" pattern="^(?:[а-яА-ЯёЁ\w]+.*){6,}$" tabindex="1">
+            <label for="cb-name">Name</label>
+
+        </div>
+        <button tabindex="6">Отправить</button>
+    </form>
+</div>
+
+<!--<div class="tabs_wrap">
+    <button id="btn_hor">Горизонтальные</button>
+    <button id="btn_vert">Вертикальные</button>
+    <div class="tab_container">
+        <div class="tabs">
+            <div class="tab">Вкладка 1</div>
+            <div class="tab active">Вкладка 2</div>
+            <div class="tab">Вкладка 3</div>
+            <div class="tab">Вкладка 4</div>
+        </div>
+        <div class="content">
+            <div class="panel"><p>1/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam animi
+                consequuntur corporis debitis doloremque ducimus fugit harum, id iusto laudantium natus nulla
+                praesentium quis voluptatibus? Architecto corporis cum inventore, nisi porro quos! Eaque illo molestiae
+                odit placeat quisquam repellendus reprehenderit suscipit! Consequuntur corporis cum excepturi fugit
+                optio quae rem?</p></div>
+            <div class="panel active"><p>2/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores doloremque
+                ea ex magnam quasi reprehenderit saepe totam veniam. Accusantium est facere libero nobis perspiciatis! A
+                debitis dignissimos dolores dolorum eos, error ex explicabo iure maxime minima molestiae odit pariatur
+                quas quisquam ullam? At deserunt illum ipsa iusto, similique totam?</p></div>
+            <div class="panel"><p>3/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto commodi
+                fugiat harum laborum minima, nulla qui sed sequi voluptatem? Culpa iste maiores necessitatibus rem? Amet
+                deserunt fuga incidunt laudantium necessitatibus nulla officiis omnis pariatur, qui, quisquam rem
+                reprehenderit totam vero? Accusamus accusantium at distinctio doloribus id incidunt reiciendis,
+                voluptas.</p></div>
+            <div class="panel"><p>4/ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur
+                corporis error excepturi ipsa minima modi possimus sunt tempora vero! Animi aperiam at autem
+                consequuntur cumque dicta dolore dolores dolorum earum exercitationem harum ipsum magni maiores,
+                mollitia optio placeat praesentium quas recusandae, reiciendis rerum saepe sequi similique suscipit,
+                tempore tenetur.</p></div>
+        </div>
+    </div>
+</div>-->
+
+<div id="err_dialog"></div>
+<!--<button id="btn1">error</button>-->
+
+</body>
+</html>
+
+
