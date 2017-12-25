@@ -8,7 +8,7 @@ var str = "'Lorem ipsu'm dolor sit amet, 'consectetur' adipisicing 'elit'.'";
 console.log( str.replace( /(?:^'(.+)')/gm, '"$1"' ) );
 
 //3
-function check_input(value, pattern) {
+/*function check_input(value, pattern) {
     var pattern = new RegExp(pattern, 'gi');
     if (pattern.test(value)) {return true} else {return false};
 }
@@ -46,7 +46,7 @@ window.onload = function () {
         }
 //                return false;
     })
-}
+}*/
 /*----------------------------*/
 
 jQuery(document).ready(function () {
@@ -85,29 +85,49 @@ jQuery(document).ready(function () {
         // changeMonth: true,
         changeYear: true,
         dateFormat:"dd.mm.yy",
-        // yearRange: "-3:+4",
         constrainInput: true,
-        // defaultDate: "-30y",
         showOtherMonths: true
         }
     );
 
-    $('#err_dialog').dialog({
-        autoOpen: false,
-        width: 350,
-        title: "Ошибка",
-        modal: true,
-        buttons: [{text: "OK", click: function() {$(this).dialog("close")}}]
-    });
-
     $('.submit-form').on('focusout', '[required]', function () {
-        // event.preventDefault();
-        alert(this.id);
+        if (Validate(this)) {
+            $(this).addClass('good', 'fast');
+            $("label[for='" + this.id + "'] > span:eq(0)").show('slide','fast');
+        } else {
+            $("label[for='" + this.id + "'] > span:eq(0)").hide('slide','fast');
+            $(this)
+                .removeClass('good','fast')
+                .addClass('bad', 'fast')
+                .effect('bounce');
+            errMsg(this);
+        }
     });
-  /*  $('#btn1').on('click', function () {
-        $('#err_dialog').dialog('open');
-    });*/
+
+
+    function Validate(el) {
+        var pattern = new RegExp(el.pattern, 'gi');
+        if (pattern.test(el.value)) {return true} else {return false};
+    }
+
+    function errMsg(el) {
+        var elName = $("label[for='" + el.id + "'] > span:eq(1)").text();
+        var msg = '<p align="center">Некорректно заполнено поле <strong>"'+ elName +'"</strong><br>Попробуйте еще раз!</p>';
+        $('#err_dialog')
+            .empty()
+            .append(msg)
+            .dialog({
+                width: 350,
+                title: "Ошибка",
+                modal: true,
+                buttons: [{text: "OK", click: function() {$(this).dialog("close")}}],
+                close: function( event, ui ) {
+                    $(el)
+                        .removeClass('bad','slow')
+                        .focus();
+                }
+            });
+
+    }
+
 });
-
-
-

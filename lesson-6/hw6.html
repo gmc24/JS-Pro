@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Jquery + AJAX</title>
-    <link rel="stylesheet" href="../../bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css">
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../../../bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css">
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/jquery-ui/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 
@@ -23,13 +23,13 @@
             <textarea name="cb-text" id="cb-text" cols="30" rows="10" placeholder="Your message"  tabindex="5"></textarea>
             <p class="req-tip">* Required Fields</p>
             <input type="email" id="cb-email" required placeholder="mymail@site.ru" pattern="^.+(?:.|\.)@.+\.(?:.+){2,}$" tabindex="4">
-            <label for="cb-email">Email address</label>
+            <label for="cb-email"><span>✔</span><span>Email address</span></label>
             <input type="phone" id="cb-phone" required placeholder="+7 999 999-99-99" pattern="^\+7[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$" tabindex="3">
-            <label for="cb-phone">Phone</label>
+            <label for="cb-phone"><span>✔</span><span>Phone</span></label>
             <input type="text" id="cb-bd" required value="01.01.1990" pattern="^\d\d\.\d\d\.\d\d\d\d$" tabindex="2">
-            <label for="cb-bd">Birthday</label>
+            <label for="cb-bd"><span>✔</span><span>Birthday</span></label>
             <input type="text" id="cb-name" required placeholder="Your Name" pattern="^(?:[а-яА-ЯёЁ\w]+.*){6,}$" tabindex="1">
-            <label for="cb-name">Name</label>
+            <label for="cb-name"><span>✔</span><span>Name</span></label>
 
         </div>
         <button tabindex="6">Отправить</button>

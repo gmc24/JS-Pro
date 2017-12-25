@@ -66,10 +66,20 @@ button:hover {
     margin-bottom: 23px;
 }
 .input-group > label {
+    position: relative;
     color: #222;
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
+}
+.input-group input[required] + label > span:first-of-type {
+    display: none;
+    position: absolute;
+    right: 0.5em;
+    top: 1.8em;
+    font-size: 2em;
+    line-height: 0em;
+    color: green;
 }
 .input-group input[required] + label::after {
     content: '*';
@@ -96,7 +106,8 @@ button:hover {
 }
 
 input.good {
-    background-color: lightgreen;
+    box-shadow: inset 0 0 10px lightgreen;
+    outline: 1px solid lightgreen;
 }
 
 input.bad {
