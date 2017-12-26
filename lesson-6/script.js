@@ -131,3 +131,7 @@ jQuery(document).ready(function () {
     }
 
 });
+
+jQuery(function($){
+    $("#cb-phone").mask("+7 (999) 999-99-99");
+});
